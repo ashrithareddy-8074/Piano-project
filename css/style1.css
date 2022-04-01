@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+/* nav
+{
+    
+    background-color:#283138 ;
+    display: flex;
+    height: 7vh;
+    align-items: center;
+    justify-content: space-between;
+} */
+/* nav
+{
+ background-color: #283128;
+ height:8vh;
+
+
+}
+.navbar
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 8vh;
+}
+ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav .navbar .navstar ul li
+{
+   list-style: none;
+}
+
+nav .navbar .navstar ul li a
+{
+    text-decoration: none;
+    color: rgb(239, 239, 240);
+    padding: 20px;
+}
+nav .auth ul li a 
+{
+    text-decoration: none ; 
+}
+.auth */
+/* {
+    display: flex;
+    text-decoration: none;
+}
+.auth .login
+{
+    text-decoration: none;
+} */
+
+
+
+
+
+
+
+
+/* nav ul li a
+{
+    color: rgb(239, 239, 240);
+    text-decoration: none;
+    padding:20px;
+
+}
+nav ul
+{
+    display: flex;
+    align-items: center;
+    height: 7vh;
+    justify-content: flex-start;
+}
+nav ul li{
+    list-style: none;
+}
+nav ul li a:hover
+{
+    color:rgb(2, 3, 8);
+    text-decoration: none;
+    padding: 20px;
+    font-weight: bolder;
+}
+.btn
+{
+  margin:10px;
+  border:3px solid; 
+  padding:3px;
+  cursor: pointer;
+  height: 5vh;
+  width: 10vh;
+  font-family: 'Lato', sans-serif;
+  font-weight: bolder;
+  border-radius: 5px;
+}
+.login
+{
+    background-color: rgb(79, 228, 42);
+}
+.signup
+{
+    background-color: crimson;
+} */
+nav
+{
+    height: 8vh;
+    background-color:#283138 ;
+    justify-content: space-between;
+}
+nav ul
+{
+    height: 8vh;
+}
+nav
+{
+    display:flex;
+    align-items: center;
+}
+nav ul li
+{
+    list-style: none;
+}
+nav ul li a 
+{
+    text-decoration: none;
+     color: white;
+     margin:10px;
+     padding:3px;
+}
+nav ul li a:hover
+{
+    color:rgb(28, 55, 187);
+    text-decoration: none;
+    padding: 20px;
+    font-weight: bolder;
+}
+h1
+{
+    color:rgb(224, 68, 94);
+}
+.losign
+{
+    display :flex;
+    align-items:centre;
+    
+}
+.login a
+{
+    color: greenyellow;
+    text-decoration: none;
+    margin:10px;
+    font-weight: 500;
+}
+.login a:hover
+{
+    font-weight: bolder;
+}
+.signup a
+{
+     color:red;
+    text-decoration: none;
+    font-weight:500;
+    margin:10px;
+}
+.signup a:hover
+{
+    font-weight: bolder;
+}
+.logo
+{
+    margin:10px;
+    padding:2px;
+}
+.navstar ul 
+{
+    display :flex;
+    align-items: center;
+    margin:10px;
+    padding:5px;
+}
+main
+{
+    background-color: rgb(247, 242, 242);
+    height:80vh;
+}
+footer
+{
+    height: 13vh;
+    background-color: rgb(2, 0, 1);
+    color: aliceblue;
+    text-align: center;
+}
+
+.keys
+{
+    
+    background-color: #fadadd;
+    display:flex;
+    justify-content: center;
+    cursor: pointer;
+}
+ .white
+{
+    background-color:white;
+   height: 28vh;
+   /* width:4.5vh; */
+   width:5vh;
+   border:1px solid black;
+   border-bottom-left-radius:5px ;
+   border-bottom-right-radius:5px ;
+   color:black;
+   display: flex;
+   justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
+    box-shadow: 1px 2px #888888;
+}
+.black
+{
+    background-color: black;
+    height: 18vh;
+    width:3.5vh;
+   margin-left: -1.75vh;
+   margin-right: -1.75vh;
+   border-bottom-left-radius: 8px;
+   border-bottom-right-radius: 8px;
+    z-index: 5;
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.white.active
+{
+    background-color:#e0cbb6;
+}
+.black.active
+{
+    background-color:#045533;
+}
+.white.mouseon
+{
+   background-color: pink;
+}
+.black.mouseon
+{
+    background-color: rgb(114, 9, 65);
+}
+.signupform
+{
+    background-color: #fadadd;
+    display: flex;
+    color: black;
+    display: none;
+}
+.container
+{
+    height: 40vh;
+    width:25vh;
+}
