@@ -6,22 +6,33 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebas
 import {
   getAuth,
   onAuthStateChanged,
+  updateProfile,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+import {
+  getDatabase,
+  set,
+  ref,
+} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import firebaseConfig from "./config.js";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+let user = null
+
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
+  if (userData) {
+    user = userData;
     console.log(user);
+    document.getElementById("login").style.display = "none";
+    document.getElementById("signup").style.display = "none";
+    document.getElementById("logout").style.display = "content";
     // ...
   } else {
     // User is signed out
-    // ...
-    console.log("sign in a user")
+    document.getElementById("login").style.display = "content";
+    document.getElementById("signup").style.display = "content";
+    document.getElementById("logout").style.display = "none";
+    console.log("sign in a user");
   }
 });
 
@@ -31,9 +42,8 @@ document.getElementById("logout").addEventListener("click", () => {
   if (confirmAction) {
     console.log(auth.signOut);
     auth.signOut().then(() => {
-      console.log("user logged out");
+      window.location.reload();
     });
-    console.log("clear local session storage");
   }
 });
 
@@ -51,18 +61,16 @@ let playsound = (key) => {
   }, 400);
   key.classList.remove("mouseon");
 };
+
 let colour = (key) => {
   key.classList.add("mouseon");
 };
-//     setTimeout(()=>
-//     {
-//         key.classList.remove("mouseon")
-//     },100)
-// }
+
 let point = (key) => {
   // key.classList.add("mouseoutt");
   key.classList.remove("mouseon");
 };
+
 keys.forEach((key) => {
   key.addEventListener("mouseover", () => colour(key));
   key.addEventListener("mouseout", () => point(key));
