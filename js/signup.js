@@ -69,7 +69,7 @@ document.getElementById("submit").addEventListener("click", function (event) {
         set(ref(db, "users/" + user.uid), {
           username: firstName + " " + lastName,
           email: email,
-          overAllTime: 0,
+          totalSecondsFromInit: 0,
           numberOfRecordings: 0,
           recordings: {
             title: "test",
@@ -79,7 +79,7 @@ document.getElementById("submit").addEventListener("click", function (event) {
         console.log(user, db);
         // Profile updated!
         // ...
-        //window.location.assign("index.html");
+        window.location.assign("index.html");
       })
       .catch((error) => {
         const errorCode = error.code;

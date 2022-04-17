@@ -6,7 +6,7 @@ import {
 import firebaseConfig from "./config.js";
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-document.getElementById("submit").addEventListener("click", function () {
+document.getElementById("submit").addEventListener("click", function (event) {
   event.preventDefault();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -21,6 +21,6 @@ document.getElementById("submit").addEventListener("click", function () {
     })
     .catch((error) => {
       console.log(error);
-      alert("Incorrect Password or Username")
+      alert("Incorrect Password or Username");
     });
 });
