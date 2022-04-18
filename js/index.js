@@ -18,9 +18,81 @@ const auth = getAuth(app);
 const dbRef = ref(getDatabase());
 
 const keys = document.querySelectorAll(".key");
-const whites = document.querySelectorAll(".key.white");
-const blacks = document.querySelectorAll(".key.black");
+const regulars = document.querySelectorAll(".key.white");
+const sharps = document.querySelectorAll(".key.black");
+const whites = [
+  "q",
+  "w",
+  "e",
+  "r",
+  "t",
+  "y",
+  "a",
+  "s",
+  "d",
+  "f",
+  "g",
+  "h",
+  "z",
+  "x",
+  "c",
+  "v",
+  "b",
+  "n",
+  "m",
+  "j",
+  "k",
+  "l",
+  ";",
+  ",",
+  "u",
+  "i",
+  "o",
+  "p",
+  ".",
+  "/",
+  "0",
+  "9",
+  "8",
+  "7",
+  "6",
+  "5",
+];
+const blacks = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "!",
+  "@",
+  "#",
+  "$",
+  "%",
+  "^",
+  "&",
+  "*",
+  "(",
+  ")",
+  "-",
+  "=",
+  "+",
+  "_",
+  ":",
+  '"',
+  "?",
+  "]",
+  "{",
+  "}",
+  "[",
+];
+const recordButton = document.querySelector(".recordBtn");
+const playButton = document.querySelector(".playBtn");
+const saveButton = document.querySelector(".saveBtn");
 
+const keyMap = [...keys].reduce((map, key) => {
+  map[key.dataset.note] = key;
+  return map;
+}, {});
 let user = null;
 let timerVar;
 let totalSeconds = 0;
@@ -28,6 +100,8 @@ let recordings = {};
 let numberOfRecordings = 0;
 let totalSecondsFromInit = 0;
 let timerRunning = false;
+let recordStartTime;
+let song;
 
 onAuthStateChanged(auth, (userData) => {
   if (userData) {
@@ -46,6 +120,17 @@ onAuthStateChanged(auth, (userData) => {
           totalSecondsFromInit = snapshot.val().totalSecondsFromInit;
           updateoverallTimerDisplay(totalSecondsFromInit);
           console.log(snapshot.val());
+
+          let list = document.getElementById("recordingsList");
+          Object.keys(recordings).forEach((item) => {
+            let li = document.createElement("li");
+            li.innerText = item;
+            li.id = item;
+            li.addEventListener("click", () => {
+              playSong(recordings[item]);
+            });
+            list.appendChild(li);
+          });
         } else {
           console.log("No data available");
         }
@@ -62,10 +147,6 @@ onAuthStateChanged(auth, (userData) => {
   }
 });
 
-function updateRecordings(title, recordFile) {
-  set(child(dbRef, "users/" + user.uid + "/recordings/" + title), recordFile);
-}
-
 document.getElementById("logout").addEventListener("click", () => {
   let confirmAction = confirm("Are you sure you want to log out?");
   console.log(confirmAction);
@@ -78,14 +159,14 @@ document.getElementById("logout").addEventListener("click", () => {
 });
 
 let playsound = (key) => {
+  if (recordActive) {
+    recordSound(key.dataset.note);
+  }
   const notesound = document.getElementById(key.dataset.note);
   notesound.currentTime = 0;
-  console.log(notesound);
+
   notesound.play();
   key.classList.add("active");
-  // notesound.addEventListener('ended', () => {
-  //     key.classList.remove("active")
-  // })
   setTimeout(() => {
     key.classList.remove("active");
   }, 400);
@@ -97,9 +178,17 @@ let colour = (key) => {
 };
 
 let point = (key) => {
-  // key.classList.add("mouseoutt");
   key.classList.remove("mouseon");
 };
+document.addEventListener("keydown", (e) => {
+  if (e.repeat) return;
+  const key = e.key;
+  const whiteKeyIndex = whites.indexOf(key);
+  const blackKeyIndex = blacks.indexOf(key);
+
+  if (whiteKeyIndex > -1) playsound(regulars[whiteKeyIndex]);
+  if (blackKeyIndex > -1) playsound(sharps[blackKeyIndex]);
+});
 
 keys.forEach((key) => {
   key.addEventListener("mouseover", () => colour(key));
@@ -161,3 +250,108 @@ document.getElementById("stopTimer").addEventListener("click", function () {
   document.getElementById("timer").innerHTML = "00:00:00";
   document.getElementById("startTimer").innerText = "Start Timer";
 });
+
+let recordActive = false;
+recordButton.addEventListener("click", () => {
+  if (user) {
+    recordState();
+  } else {
+    alert("Please login or signup to continue");
+  }
+});
+saveButton.addEventListener("click", () => {
+  saveNote();
+});
+playButton.addEventListener("click", () => {
+  playSong(song);
+});
+
+function recordState() {
+  // recordButton.classList.toggle('active')
+  recordButton.classList.toggle("recordingOn");
+
+  recordActive = recordStatus();
+  if (recordActive) {
+    // console.log("startRecord");
+    startRecord();
+  } else {
+    // console.log("stoprecord");
+    stopRecord();
+  }
+}
+function recordStatus() {
+  // return recordBtn != null && recordBtn.classList.contains('active');
+  //if(recordButton.classList.contains('active'))
+  if (recordButton.classList.contains("recordingOn")) {
+    // console.log("returned true");
+    return true;
+  } else {
+    return false;
+  }
+}
+recordActive = recordStatus();
+function startRecord() {
+  // console.log("test start record");
+  playButton.classList.remove("show");
+  saveButton.classList.remove("show");
+  recordStartTime = Date.now();
+  document.getElementById("recordBtn").innerText = "Stop";
+  song = [];
+}
+function stopRecord() {
+  // console.log("test stop record");
+  document.getElementById("recordBtn").innerText = "Record";
+  playButton.classList.add("show");
+  saveButton.classList.add("show");
+}
+function playSong(songObject) {
+  console.log(songObject);
+  if (songObject.length != 0) {
+    // console.log("test playSong");
+    songObject.forEach((note) => {
+      setTimeout(() => {
+        playsound(keyMap[note.key]);
+      }, note.startTime);
+      // console.log(recordings)
+    });
+  }
+}
+
+function recordSound(note) {
+  //console.log("test recordSound");
+  song.push({
+    key: note,
+    startTime: Date.now() - recordStartTime,
+  });
+}
+
+function saveNote() {
+  // console.log(Object.keys(recordings))
+  // playSong(recordings["My first song"])
+  if (song.length == 0) {
+    alert("Empty recording");
+  } else {
+    let title = prompt(
+      "Please enter title for your recording:",
+      "recording - " + (numberOfRecordings + 1)
+    );
+    if (title) {
+      numberOfRecordings++;
+      if (user) {
+        set(
+          child(dbRef, "users/" + user.uid + "/numberOfRecordings/"),
+          numberOfRecordings
+        );
+        set(child(dbRef, "users/" + user.uid + "/recordings/" + title), song);
+      }
+      recordings[title] = song;
+      let listItem = document.createElement("li");
+      listItem.innerText = title;
+      listItem.id = title;
+      listItem.addEventListener("click", () => {
+        playSong(recordings[title]);
+      });
+      document.getElementById("recordingsList").appendChild(listItem);
+    }
+  }
+}

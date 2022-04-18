@@ -10,13 +10,7 @@ import {
   ref,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 import firebaseConfig from "./config.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
@@ -52,7 +46,6 @@ document.getElementById("submit").addEventListener("click", function (event) {
   let email = document.getElementById("email").value;
   let user = null;
 
-  console.log("clicked test");
   var equalpass = false;
   equalpass = checkpassword(passwordd, conpasswordd);
 
@@ -70,10 +63,42 @@ document.getElementById("submit").addEventListener("click", function (event) {
           username: firstName + " " + lastName,
           email: email,
           totalSecondsFromInit: 0,
-          numberOfRecordings: 0,
+          numberOfRecordings: 1,
           recordings: {
-            title: "test",
-            title2: "test",
+            "sample Recording": [
+              {
+                key: "B2",
+                startTime: 500,
+              },
+              {
+                key: "C3",
+                startTime: 1234,
+              },
+              {
+                key: "D3",
+                startTime: 1997,
+              },
+              {
+                key: "E3",
+                startTime: 2581,
+              },
+              {
+                key: "F3",
+                startTime: 3256,
+              },
+              {
+                key: "G3",
+                startTime: 3841,
+              },
+              {
+                key: "A4",
+                startTime: 4402,
+              },
+              {
+                key: "B4",
+                startTime: 4900,
+              },
+            ],
           },
         });
         console.log(user, db);
@@ -84,7 +109,6 @@ document.getElementById("submit").addEventListener("click", function (event) {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
         console.log(errorCode + errorMessage);
       });
   } else {
