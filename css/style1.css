@@ -188,8 +188,6 @@ h1 {
   padding: 5px;
 }
 main {
-  /* background-color: rgba(173, 223, 215, 0.916);
-  background: linear-gradient( #4ecfcd, #e66465); */
   background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #db4125);
   height: 75vh;
 }
@@ -284,8 +282,9 @@ footer {
   justify-content: center;
   margin: 20px;
   height: 40vh;
-  border: 2px solid red;
-  /* background-color: #29c7ad; */
+  /* border: 2px solid red; */
+  border: 2px solid rgb(0, 0, 0);
+
 }
 .overTimer {
   text-align: right;
@@ -369,7 +368,8 @@ footer {
   justify-content: center;
   margin: 20px;
   height: 40vh;
-  border: 2px solid rgb(0, 255, 0);
+  /* border: 2px solid rgb(0, 255, 0); */
+  border: 2px solid rgb(0, 0, 0);
   /* background-color: #e83965; */
 }
 .recordBtn {
@@ -417,7 +417,8 @@ footer {
   justify-content: space-evenly;
   margin: 20px;
   height: 40vh;
-  border: 2px solid rgb(0, 0, 255);
+  /* border: 2px solid rgb(0, 0, 255); */
+  border: 2px solid rgb(0, 0, 0);
   overflow-y: scroll;
   /* background-color: rgb(19, 166, 112); */
 }
