@@ -188,7 +188,9 @@ h1 {
   padding: 5px;
 }
 main {
-  background-color: rgb(247, 242, 242);
+  /* background-color: rgba(173, 223, 215, 0.916);
+  background: linear-gradient( #4ecfcd, #e66465); */
+  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #db4125);
   height: 75vh;
 }
 footer {
@@ -273,6 +275,7 @@ footer {
   text-align: center;
   margin: 20px;
   padding: 15px;
+
 }
 .time {
   display: flex;
@@ -282,6 +285,7 @@ footer {
   margin: 20px;
   height: 40vh;
   border: 2px solid red;
+  /* background-color: #29c7ad; */
 }
 .overTimer {
   text-align: right;
@@ -312,29 +316,51 @@ footer {
 #startTimer {
   margin: 10px;
   padding: 10px;
-  background-color: #00d87e;
+  background-color: #0fa656;
   border: 2px solid black;
   color: white;
   width: 120px;
   cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+#startTimer:hover
+{
+  color: green;
+  font-weight: bolder;
+  
 }
 #pauseTimer {
   margin: 10px;
   padding: 10px;
-  background-color: #0b43f9;
+  background-color: #22afc2;
+  /* 0b2ff9 */
   border: 2px solid black;
   color: white;
   width: 120px;
   cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+#pauseTimer:hover
+{
+  color: rgb(43, 24, 188);
+  font-weight: bolder;
 }
 #stopTimer {
   margin: 10px;
   padding: 10px;
-  background-color: red;
+  background-color: rgb(207, 28, 105);
   border: 2px solid black;
   color: white;
   width: 120px;
   cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+#stopTimer:hover{
+  color: rgba(171, 27, 27, 0.745);
+  font-weight: bolder;
 }
 .record {
   display: flex;
@@ -344,6 +370,7 @@ footer {
   margin: 20px;
   height: 40vh;
   border: 2px solid rgb(0, 255, 0);
+  /* background-color: #e83965; */
 }
 .recordBtn {
   margin: 10px;
@@ -392,6 +419,7 @@ footer {
   height: 40vh;
   border: 2px solid rgb(0, 0, 255);
   overflow-y: scroll;
+  /* background-color: rgb(19, 166, 112); */
 }
 .recordings li
 {
